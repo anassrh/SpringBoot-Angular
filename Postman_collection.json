@@ -1,0 +1,62 @@
+{
+  "info": {
+    "name": "TP Météo — Spring Boot",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Paris",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8081/api/weather?city=Paris"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Statut 200', function () { pm.response.to.have.status(200); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ville vide",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8081/api/weather?city="
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Statut 400', function () { pm.response.to.have.status(400); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ville inexistante",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:8081/api/weather?city=zzzzzzinconnue987654"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Statut 404', function () { pm.response.to.have.status(404); });"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
